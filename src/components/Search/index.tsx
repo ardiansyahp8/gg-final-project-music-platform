@@ -130,6 +130,7 @@ const Search = ({search, users}:Props)=> {
                             sx={{
                                 'input': {
                                     color: 'white',
+                                    ariaLabel:'search-form'
                                 },
                                 '&::placeholder': {
                                     color: 'blue',

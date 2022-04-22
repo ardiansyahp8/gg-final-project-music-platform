@@ -1,11 +1,16 @@
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
-import store from './Data/Store';
+import userEvent from '@testing-library/user-event';
+import Search from './components/Search';
+import { Provider } from 'react-redux';
+import store from './Data/store';
 
-test('renders learn react link', () => {render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-  );
+test('render All Component', () => {
+  render(<Provider store={store}><Search /></Provider>);
+
+  const btnSelect = screen.getByRole('button');
+
+  expect(btnSelect).toBeInTheDocument();
+  userEvent.click(btnSelect);
 });
