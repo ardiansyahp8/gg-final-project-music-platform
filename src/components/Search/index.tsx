@@ -8,6 +8,7 @@ import Play from '../Playlist/play';
 import { getUserProfile } from '../../Data/Profile.js';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Image from "../UI/Image";
 import axios from "axios";
 
 type Searches = {
@@ -48,6 +49,8 @@ const Search = ({search, users}:Props)=> {
     const token = useSelector((state: RootStateOrAny) => state.dataAccessToken.value);
     const [login, setLogin] = useState(false);
     const [keyword, setKeyword] = useState("");
+    const [images, setImages] = useState({});
+    const [username, setUsername] = useState({});
     const [tracks, setTracks] = useState([]);
     const [recent, setRecent] = useState([]);
     const [selectedlist, setSelectedList] = useState([]);
@@ -101,6 +104,8 @@ const Search = ({search, users}:Props)=> {
     
                 setUser(response);
                 setUserId(response.id);
+                setUsername(response.display_name);
+                setImages(response.images[0].url);
                 setLogin(true);
             } catch (e) {
                 //console.log('error');
@@ -112,6 +117,16 @@ const Search = ({search, users}:Props)=> {
 
     return (
         <div className="search-content">
+        <Image
+        title={username}
+        imgUrl={images}
+        width="20px"
+        height="20px"
+        />
+        {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        } <span>&nbsp;{username}</span>
         <Login />
             {(login) ? (
                 <>
